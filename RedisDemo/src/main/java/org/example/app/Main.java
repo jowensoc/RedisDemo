@@ -1,8 +1,11 @@
+package org.example.app;
+
 import redis.clients.jedis.Jedis;
 
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
+import org.example.services.*;
 
 public class Main {
     private static RedisService service = new RedisService("localhost", 6379);
