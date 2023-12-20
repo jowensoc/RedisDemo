@@ -1,6 +1,7 @@
 import redis.clients.jedis.Jedis;
 
 public class Main {
+    private static RedisService service = new RedisService("localhost", 6379);
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");
@@ -9,15 +10,13 @@ public class Main {
     }
 
     public static void testRedis() {
-        Jedis jedis = new Jedis("localhost", 6379);
+        Boolean result = service.addToSet("Bike:1", "Rosebud");
 
-        String status = jedis.set("Bike:1", "Rosebud");
-
-        if (status.contains("OK")) {
-            System.out.println("Save data");
-        } else {
-            System.out.println("Didn't save data");
+        if (result) {
+            System.out.println(service.getValue("Bike:1"));
         }
     }
+
+
 
 }
