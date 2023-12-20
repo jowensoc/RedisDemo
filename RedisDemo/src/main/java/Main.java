@@ -1,22 +1,38 @@
 import redis.clients.jedis.Jedis;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
     private static RedisService service = new RedisService("localhost", 6379);
 
     public static void main(String[] args) {
         System.out.println("Hello, World!");
 
-        testRedis();
+        addDataToRedis();
     }
 
-    public static void testRedis() {
-        Boolean result = service.addToSet("Bike:1", "Rosebud");
+    public static void addDataToRedis() {
+        HashMap<String, String> dictEntries = new HashMap<String, String>();
 
-        if (result) {
-            System.out.println(service.getValue("Bike:1"));
+        dictEntries.put("Vehicle:1", "Rosebud");
+        dictEntries.put("Vehicle:2", "Batmobile");
+        dictEntries.put("Vehicle:3", "Delorean");
+        dictEntries.put("Vehicle:4", "KITT");
+        dictEntries.put("Vehicle:5", "Gray Rider");
+        dictEntries.put("Vehicle:6", "Bumblebee");
+
+        for (Map.Entry<String, String> entry : dictEntries.entrySet()) {
+            Boolean result = service.addToSet(entry.getKey(), entry.getValue());
+
+            if (result) {
+                System.out.println("Added Key: " + entry.getKey());
+                System.out.print("Value for key '" + entry.getKey() + "': ");
+                System.out.println(service.getValue(entry.getKey()));
+            }
         }
+
     }
-
-
 
 }
