@@ -14,6 +14,7 @@ public class Main {
         System.out.println("Hello, World!");
 
         addDataToRedis();
+        addHashSetToRedis();
     }
 
     public static void addDataToRedis() {
@@ -31,11 +32,29 @@ public class Main {
 
             if (result) {
                 System.out.println("Added Key: " + entry.getKey());
-                System.out.print("Value for key '" + entry.getKey() + "': ");
+                System.out.print("Value for key '" + entry.getValue() + "': ");
                 System.out.println(service.getValue(entry.getKey()));
             }
         }
 
+    }
+
+    public static void addHashSetToRedis() {
+        String keyName = "Employee#1";
+        String fieldName = "FullName";
+        String fieldValue = "Joe Bloggs";
+
+        service.addToHashSet(keyName, fieldName, fieldValue);
+        service.addToHashSet(keyName, "Role", "Software Engineer");
+        service.addToHashSet(keyName, "Department", "I.T.");
+
+        Map<String,String> data = service.getHashSet(keyName);
+
+
+        for (Map.Entry<String, String> entry : data.entrySet()) {
+            System.out.print("FieldName: " + entry.getKey() + ". ");
+            System.out.println("Value: '" + entry.getValue() + "'");
+        }
     }
 
 }
