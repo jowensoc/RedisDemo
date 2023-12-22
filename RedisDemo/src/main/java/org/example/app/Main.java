@@ -50,7 +50,6 @@ public class Main {
 
         Map<String,String> data = service.getHashSet(keyName);
 
-
         for (Map.Entry<String, String> entry : data.entrySet()) {
             System.out.print("FieldName: " + entry.getKey() + ". ");
             System.out.println("Value: '" + entry.getValue() + "'");
