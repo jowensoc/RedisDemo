@@ -29,7 +29,7 @@ public class RedisService {
     public Boolean addToHashSet(String keyName, String fieldName, String val) {
         Long status = jedis.hset(keyName, fieldName, val);
 
-        return (status == 1);
+        return (status == 0);
     }
 
     public Map<String, String> getHashSet(String keyName) {
