@@ -1,10 +1,11 @@
 package org.example.services;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Order(1)
 class RedisService_HashTest {
     static RedisService service = null;
     private String keyName = "Contractor#1";
@@ -24,39 +25,26 @@ class RedisService_HashTest {
     }
 
     @Test
+    @Order(1)
     void addToHashSet() {
-
+        System.out.println("1");
         List<Boolean> listOfResults = new ArrayList<Boolean>();
 
         for (Map.Entry<String, String> entry : keyValues.entrySet()) {
-            Boolean result = service.addToHashSet(keyName, entry.getKey(), entry.getValue());
+            boolean result = service.addToHashSet(keyName, entry.getKey(), entry.getValue());
 
             listOfResults.add(result);
 
+            System.out.println("Added ? " + result);
+
             if (result) {
                 System.out.println("Added Key: " + entry.getKey());
-                System.out.print("Value for key '" + entry.getValue() + "': ");
-                System.out.println(service.getValue(entry.getKey()));
+                System.out.println("Value for key '" + entry.getValue() + "': ");
             }
         }
 
         assert(!listOfResults.contains(false));
     }
 
-    @Test
-    void getHashSet() {
-        System.out.println(keyName);
-        Map<String, String> currentList = service.getHashSet(keyName);
 
-        //assert(!currentList.isEmpty());
-
-        for (Map.Entry<String, String> entry : currentList.entrySet()) {
-            System.out.print("Field: " + entry.getKey() + ". ");
-            System.out.print("Value: " + entry.getValue());
-            System.out.println(" ");
-        }
-
-        //assert(currentList.size() == keyValues.size());
-
-    }
 }

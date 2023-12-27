@@ -1,7 +1,11 @@
 package org.example.services;
 
-import java.util.Set;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Order(2)
 class RedisService_SetTest {
     static RedisService service = null;
     private String keyName = "Car#1";
@@ -14,18 +18,21 @@ class RedisService_SetTest {
     }
 
     @org.junit.jupiter.api.Test
+    @Order(1)
     void addToSet() {
-        Boolean result = service.addToSet(keyName, keyValue);
+        boolean result = service.addToSet(keyName, keyValue);
 
         assert(result);
     }
 
     @org.junit.jupiter.api.Test
+    @Order(2)
     void getValue() {
         String result = service.getValue(keyName);
 
         assert(result.equals(keyValue));
     }
+
 
 
 }
