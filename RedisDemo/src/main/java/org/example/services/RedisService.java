@@ -22,17 +22,37 @@ public class RedisService {
         return jedis.get(keyName);
     }
 
+    public boolean deleteByKeyname(String keyName) {
+        long status = jedis.del(keyName);
+
+        System.out.println("Deleted Key Status:" + status);
+
+        return (status > 0);
+    }
+
+    public boolean deleteByHashSetKeyname(String keyName) {
+        Long status = jedis.del(keyName);
+
+        return (status > 0);
+    }
+
     public Set<String> getValues(String keyName) {
         return jedis.smembers(keyName);
     }
 
     public Boolean addToHashSet(String keyName, String fieldName, String val) {
-        Long status = jedis.hset(keyName, fieldName, val);
+        long status = jedis.hset(keyName, fieldName, val);
 
-        return (status == 0);
+        System.out.println("HashSet Add Status: " + status);
+
+        return (status > 0);
     }
 
     public Map<String, String> getHashSet(String keyName) {
         return jedis.hgetAll(keyName);
+    }
+
+    public String flushDB() {
+        return jedis.flushAll();
     }
 }
