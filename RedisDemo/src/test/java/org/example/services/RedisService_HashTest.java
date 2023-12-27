@@ -15,10 +15,11 @@ class RedisService_HashTest {
         service = new RedisService("localhost", 6379);
 
         keyValues = new HashMap<String, String>();
-        keyValues.put("FullName", "Emily Freeman");
+        keyValues.put("FullName", "Gordon Freeman");
         keyValues.put("Role", "Programmer");
         keyValues.put("Salary", "£42,000");
         keyValues.put("Department", "I.T.");
+        keyValues.put("Project", "Halflife");
 
     }
 
