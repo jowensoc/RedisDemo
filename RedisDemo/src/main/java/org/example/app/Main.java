@@ -42,11 +42,11 @@ public class Main {
     public static void addHashSetToRedis() {
         String keyName = "Employee#1";
         String fieldName = "FullName";
-        String fieldValue = "Joe Bloggs";
+        String fieldValue = "Fred Bloggs";
 
         service.addToHashSet(keyName, fieldName, fieldValue);
         service.addToHashSet(keyName, "Role", "Software Engineer");
-        service.addToHashSet(keyName, "Department", "I.T.");
+        service.addToHashSet(keyName, "Department", "Tech Support");
 
         Map<String,String> data = service.getHashSet(keyName);
 
