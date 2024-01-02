@@ -4,6 +4,9 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -11,28 +14,51 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class RedisService_DeleteTest {
 
     static RedisService service = null;
-    private String keyName = "Car#1";
-    private String hashSetKeyName = "Contractor#1";
+    private static ArrayList<String> listofKeyNames = new ArrayList<String>();
+    private static ArrayList<String> listofHashsetKeyNames = new ArrayList<String>();
 
     @org.junit.jupiter.api.BeforeAll
     static void setUp() {
         service = new RedisService("localhost", 6379);
+
+        listofKeyNames.add("Car#1");
+        listofKeyNames.add("Car#2");
+        listofKeyNames.add("Car#3");
+        listofKeyNames.add("Car#4");
+        listofKeyNames.add("Car#5");
+
+        listofHashsetKeyNames.add("Contractor#1");
+        listofHashsetKeyNames.add("Contractor#2");
+        listofHashsetKeyNames.add("Contractor#3");
+
     }
 
     @org.junit.jupiter.api.Test
     @Order(1)
-    void deleteByKeyname() {
-        boolean result = service.deleteByKeyname(keyName);
+    void deleteByKeynames() {
+        List<Boolean> listOfResults = new ArrayList<Boolean>();
 
-        assert(result);
+        for(String keyName : listofKeyNames) {
+            boolean result = service.deleteByKeyname(keyName);
+
+            listOfResults.add(result);
+        }
+
+        assert(!listOfResults.contains(false));
     }
 
     @org.junit.jupiter.api.Test
     @Order(2)
     void deleteByHashSetKeyname() {
-        boolean result = service.deleteByKeyname(hashSetKeyName);
+        List<Boolean> listOfResults = new ArrayList<Boolean>();
 
-        assert(result);
+        for(String keyName : listofHashsetKeyNames) {
+            boolean result = service.deleteByKeyname(keyName);
+
+            listOfResults.add(result);
+        }
+
+        assert(!listOfResults.contains(false));
     }
 
     @org.junit.jupiter.api.Test
