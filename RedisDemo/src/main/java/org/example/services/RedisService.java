@@ -25,8 +25,6 @@ public class RedisService {
     public boolean deleteByKeyname(String keyName) {
         long status = jedis.del(keyName);
 
-        System.out.println("Deleted Key Status:" + status);
-
         return (status > 0);
     }
 
@@ -42,8 +40,6 @@ public class RedisService {
 
     public Boolean addToHashSet(String keyName, String fieldName, String val) {
         long status = jedis.hset(keyName, fieldName, val);
-
-        System.out.println("HashSet Add Status: " + status);
 
         return (status > 0);
     }
