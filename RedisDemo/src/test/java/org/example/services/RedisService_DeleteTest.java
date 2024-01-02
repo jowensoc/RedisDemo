@@ -21,11 +21,11 @@ public class RedisService_DeleteTest {
     static void setUp() {
         service = new RedisService("localhost", 6379);
 
-        listofKeyNames.add("Car#1");
-        listofKeyNames.add("Car#2");
-        listofKeyNames.add("Car#3");
-        listofKeyNames.add("Car#4");
-        listofKeyNames.add("Car#5");
+        listofKeyNames.add("Car:1");
+        listofKeyNames.add("Car:2");
+        listofKeyNames.add("Car:3");
+        listofKeyNames.add("Car:4");
+        listofKeyNames.add("Car:5");
 
         listofHashsetKeyNames.add("Contractor#1");
         listofHashsetKeyNames.add("Contractor#2");

@@ -20,11 +20,11 @@ class RedisService_SetTest {
     static void setUp() {
         service = new RedisService("localhost", 6379);
 
-        hashMap.put("Car#1", "Renault");
-        hashMap.put("Car#2", "Ford");
-        hashMap.put("Car#3", "Skoda");
-        hashMap.put("Car#4", "Volkswagon");
-        hashMap.put("Car#5", "Audi");
+        hashMap.put("Car:1", "Renault");
+        hashMap.put("Car:2", "Ford");
+        hashMap.put("Car:3", "Skoda");
+        hashMap.put("Car:4", "Volkswagon");
+        hashMap.put("Car:5", "Audi");
     }
 
     @org.junit.jupiter.api.Test
