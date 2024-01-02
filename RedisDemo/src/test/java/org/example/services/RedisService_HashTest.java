@@ -27,7 +27,6 @@ class RedisService_HashTest {
     @Test
     @Order(1)
     void addToHashSet() {
-        System.out.println("1");
         List<Boolean> listOfResults = new ArrayList<Boolean>();
 
         for (Map.Entry<String, String> entry : keyValues.entrySet()) {
@@ -44,6 +43,20 @@ class RedisService_HashTest {
         }
 
         assert(!listOfResults.contains(false));
+    }
+
+    @Test
+    @Order(2)
+    void getValuesFromHashSet() {
+        Map<String, String> results = service.getHashSet(keyName);
+
+        assert(!results.isEmpty());
+
+        for (Map.Entry<String, String> entry : results.entrySet()) {
+            System.out.print("Key: " + entry.getKey() + ". ");
+            System.out.print("Value: '" + entry.getValue() + "'");
+            System.out.println(" ");
+        }
     }
 
 
