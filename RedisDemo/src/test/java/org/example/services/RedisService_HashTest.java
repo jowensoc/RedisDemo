@@ -71,12 +71,7 @@ class RedisService_HashTest {
 
                 listOfResults.add(result);
 
-                System.out.println("Added ? " + result);
-
-                if (result) {
-                    System.out.println("Added Key: " + entry.getKey());
-                    System.out.println("Value for key '" + entry.getValue() + "': ");
-                }
+                //printResultsFromSet_MapEntry(result, "Added", currentField);
             }
         }
 
@@ -94,11 +89,7 @@ class RedisService_HashTest {
 
             listOfResults.add(!results.isEmpty());
 
-            for (Map.Entry<String, String> entry : results.entrySet()) {
-                System.out.print("Key: " + entry.getKey() + ". ");
-                System.out.print("Value: '" + entry.getValue() + "'");
-                System.out.println(" ");
-            }
+            //printResultsFromSet_Map(!results.isEmpty(), "Get", results);
         }
 
         assert(!listOfResults.contains(false));
@@ -118,15 +109,38 @@ class RedisService_HashTest {
 
             listOfResults.add(result);
 
-            System.out.println("Saved ? " + result);
-
-            if (result) {
-                System.out.println("Added Key: " + entry.getKey());
-                System.out.println("Value for key '" + entry.getValue() + "': ");
-            }
+            //printResultsFromHashMap(result, "Saved", entry);
         }
 
         assert(!listOfResults.contains(false));
+    }
+
+    void printResultsFromSet_MapEntry(boolean result, String actionType, Map.Entry<String, String> entry) {
+        System.out.println(actionType + " ? " + result);
+
+        if (result) {
+            System.out.println("Added Key: " + entry.getKey());
+            System.out.println("Value for key '" + entry.getValue() + "': ");
+        }
+    }
+
+    void printResultsFromSet_Map(boolean result, String actionType, Map<String, String> entries) {
+        System.out.println(actionType + " ? " + result);
+
+        for (Map.Entry<String, String> entry : entries.entrySet()) {
+            System.out.print("Key: " + entry.getKey() + ". ");
+            System.out.print("Value: '" + entry.getValue() + "'");
+            System.out.println(" ");
+        }
+    }
+
+    void printResultsFromHashMap(boolean result, String actionType, Map.Entry<String, HashMap<String, String>> entry) {
+        System.out.println(actionType + " ? " + result);
+
+        if (result) {
+            System.out.println("Added Key: " + entry.getKey());
+            System.out.println("Value for key '" + entry.getValue() + "': ");
+        }
     }
 
 
