@@ -67,7 +67,7 @@ class RedisService_HashTest {
 
         for (Map.Entry<String, HashMap<String, String>> entry: hashTable.entrySet()) {
             for(Map.Entry<String, String> currentField : entry.getValue().entrySet()) {
-                boolean result = service.addToHashSet(entry.getKey(), currentField.getKey(), currentField.getValue());
+                boolean result = service.saveToHashSet(entry.getKey(), currentField.getKey(), currentField.getValue());
 
                 listOfResults.add(result);
 
@@ -98,6 +98,31 @@ class RedisService_HashTest {
                 System.out.print("Key: " + entry.getKey() + ". ");
                 System.out.print("Value: '" + entry.getValue() + "'");
                 System.out.println(" ");
+            }
+        }
+
+        assert(!listOfResults.contains(false));
+    }
+
+    @Test
+    @Order(3)
+    void updateToHashSet() {
+
+        List<Boolean> listOfResults = new ArrayList<Boolean>();
+
+        for (Map.Entry<String, HashMap<String, String>> entry: hashTable.entrySet()) {
+            String currentFieldName = "Project";
+            String newFieldValue = entry.getValue().get(currentFieldName) + " (Active)";
+
+            boolean result = service.saveToHashSet(entry.getKey(), currentFieldName, newFieldValue);
+
+            listOfResults.add(result);
+
+            System.out.println("Saved ? " + result);
+
+            if (result) {
+                System.out.println("Added Key: " + entry.getKey());
+                System.out.println("Value for key '" + entry.getValue() + "': ");
             }
         }
 

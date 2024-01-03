@@ -12,7 +12,7 @@ public class RedisService {
         jedis = new Jedis(hostName, portNumber);
     }
 
-    public Boolean addToSet(String keyName, String val) {
+    public Boolean saveToSet(String keyName, String val) {
         String status = jedis.set(keyName, val);
 
         return status.contains("OK");
@@ -38,11 +38,12 @@ public class RedisService {
         return jedis.smembers(keyName);
     }
 
-    public Boolean addToHashSet(String keyName, String fieldName, String val) {
+    public Boolean saveToHashSet(String keyName, String fieldName, String val) {
         long status = jedis.hset(keyName, fieldName, val);
 
-        return (status > 0);
+        return (status >= 0);
     }
+
 
     public Map<String, String> getHashSet(String keyName) {
         return jedis.hgetAll(keyName);
