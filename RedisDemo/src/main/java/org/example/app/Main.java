@@ -28,7 +28,7 @@ public class Main {
         dictEntries.put("Vehicle:6", "Bumblebee");
 
         for (Map.Entry<String, String> entry : dictEntries.entrySet()) {
-            Boolean result = service.addToSet(entry.getKey(), entry.getValue());
+            Boolean result = service.saveToSet(entry.getKey(), entry.getValue());
 
             if (result) {
                 System.out.println("Added Key: " + entry.getKey());
@@ -44,9 +44,9 @@ public class Main {
         String fieldName = "FullName";
         String fieldValue = "Fred Bloggs";
 
-        service.addToHashSet(keyName, fieldName, fieldValue);
-        service.addToHashSet(keyName, "Role", "Software Engineer");
-        service.addToHashSet(keyName, "Department", "Tech Support");
+        service.saveToHashSet(keyName, fieldName, fieldValue);
+        service.saveToHashSet(keyName, "Role", "Software Engineer");
+        service.saveToHashSet(keyName, "Department", "Tech Support");
 
         Map<String,String> data = service.getHashSet(keyName);
 

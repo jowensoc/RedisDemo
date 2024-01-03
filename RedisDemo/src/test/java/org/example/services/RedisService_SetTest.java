@@ -33,7 +33,7 @@ class RedisService_SetTest {
         List<Boolean> listOfResults = new ArrayList<Boolean>();
 
         for(Map.Entry<String, String> entry : hashMap.entrySet()) {
-            boolean result = service.addToSet(entry.getKey(), entry.getValue());
+            boolean result = service.saveToSet(entry.getKey(), entry.getValue());
 
             listOfResults.add(result);
         }
@@ -56,6 +56,18 @@ class RedisService_SetTest {
         assert(!listOfResults.contains(false));
     }
 
+    @org.junit.jupiter.api.Test
+    @Order(3)
+    void updateData() {
+        List<Boolean> listOfResults = new ArrayList<Boolean>();
 
+        for(Map.Entry<String, String> entry : hashMap.entrySet()) {
+            boolean result = service.saveToSet(entry.getKey(), entry.getValue() + " Limited Edition");
+
+            listOfResults.add(result);
+        }
+
+        assert(!listOfResults.contains(false));
+    }
 
 }
